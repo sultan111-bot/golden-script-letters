@@ -1,26 +1,38 @@
 import { createFileRoute } from "@tanstack/react-router";
+import { useState } from "react";
+import { AnimatePresence } from "framer-motion";
+import { Envelope } from "@/components/Envelope";
+import { Letter } from "@/components/Letter";
+import { PortraitGuard } from "@/components/PortraitGuard";
+import { LETTER_CONFIG } from "@/UBAH_DISINI.js";
 
 export const Route = createFileRoute("/")({
   component: Index,
+  head: () => ({
+    meta: [
+      { title: `Surat untuk ${LETTER_CONFIG.recipientName}` },
+      { name: "description", content: LETTER_CONFIG.title },
+    ],
+  }),
 });
 
-// IMPORTANT: Replace this placeholder. For sites with multiple pages (About, Services, Contact, etc.),
-// create separate route files (about.tsx, services.tsx, contact.tsx) — don't put all pages in this file.
-function PlaceholderIndex() {
+function Index() {
+  const [opened, setOpened] = useState(false);
+
   return (
-    <div
-      className="flex min-h-screen items-center justify-center"
-      style={{ backgroundColor: "#fcfbf8" }}
-    >
-      <img
-        data-lovable-blank-page-placeholder="REMOVE_THIS"
-        src="https://cdn.gpteng.co/blank-app-v1.svg"
-        alt="Your app will live here!"
-      />
+    <div className="min-h-screen bg-navy-deep">
+      <PortraitGuard />
+      <AnimatePresence mode="wait">
+        {!opened ? (
+          <Envelope
+            key="env"
+            recipientName={LETTER_CONFIG.recipientName}
+            onOpen={() => setOpened(true)}
+          />
+        ) : (
+          <Letter key="letter" />
+        )}
+      </AnimatePresence>
     </div>
   );
-}
-
-function Index() {
-  return <PlaceholderIndex />;
 }
