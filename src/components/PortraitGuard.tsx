@@ -38,9 +38,7 @@ export function PortraitGuard() {
             >
               <Smartphone className="w-16 h-16 text-gold mx-auto" />
             </motion.div>
-            <h2 className="font-serif-display text-2xl text-gold">
-              Miringkan HP kamu
-            </h2>
+            <h2 className="font-serif-display text-2xl text-gold">Miringkan HP kamu</h2>
             <p className="text-foreground/70 leading-relaxed">
               Untuk pengalaman membaca terbaik, putar perangkatmu ke mode{" "}
               <span className="text-gold">Landscape</span> ✨
